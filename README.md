@@ -1,50 +1,92 @@
-# Welcome to your Expo app 👋
+# Expo 51 Academic Project
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an academic project created to test the latest features of Expo 51. The project demonstrates how to create a simple event scheduling application using React Native with Expo 51. It includes functionalities to add, view, and manage events using the `expo-sqlite` library for local database management.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Add Events**: Users can add events with a name, date, time, and description.
+- **View Events**: Users can view all the events that have been added.
+- **Local Storage**: Events are stored locally using SQLite, which persists across app restarts.
 
-   ```bash
+## Technologies Used
+
+- **Expo 51**: The latest version of Expo, which includes new features and improvements.
+- **React Native**: A framework for building native apps using React.
+- **expo-sqlite**: A library that provides access to a SQLite database, allowing for persistent local storage.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- Expo CLI
+
+### Installation
+
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/Hargenx/Testando-for-fun.git
+   cd Testando-for-fun
+   ```
+
+2. Install the dependencies:
+
+   ```sh
    npm install
    ```
 
-2. Start the app
+3. Install Expo (if not already installed): blog.expo.dev/the-new-expo-cli-f4250d8e3421
 
-   ```bash
-    npx expo start
+   ```sh
+   npx install expo
    ```
 
-In the output, you'll find options to open the app in a
+4. Start the project:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```sh
+   expo start
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Project Structure
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```code
+expo-51-academic-project
+├── app
+│   ├── (tabs)
+│   │   └── _layout_.tsx
+│   ├── index.tsx
+│   ├── details.tsx
+│   ├── db.ts
+├── LICENSE
+└── README.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- `db.ts`: Contains functions to initialize the database, add events, and fetch events.
+- `app/index.tsx`: The main screen where users can add new events.
+- `app/details.tsx`: The screen where users can view all the events.
+- `app/(tabs)/_layout.tsx`: To navigate between the two routes.
 
-## Learn more
+## How to Use
 
-To learn more about developing your project with Expo, look at the following resources:
+1. **Adding Events**:
+   - Navigate to the home screen.
+   - Enter the event details including name, date, time, and description.
+   - Click on the "Adicionar Evento" button to add the event to the local database.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+2. **Viewing Events**:
+   - Navigate to the details screen.
+   - All the added events will be displayed in a list.
 
-## Join the community
+## Notes
 
-Join our community of developers creating universal apps.
+- This project is for academic purposes only and is intended to test and demonstrate new features in Expo 51.
+- It is not intended for production use.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+Feel free to explore and modify the project to better understand the new features of Expo 51. If you encounter any issues or have any questions, please feel free to open an issue or contact the project maintainers.
