@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { useRouter } from "expo-router";
+import { createTable, addEvent } from "./db";
 
-export default function App() {
+export default function Home() {
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState(new Date());
   const [eventTime, setEventTime] = useState(new Date());
   const [eventDescription, setEventDescription] = useState("");
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    createTable();
+  }, []);
 
   const onChangeDate = (event: any, selectedDate: any) => {
     const currentDate = selectedDate || eventDate;
@@ -22,11 +30,25 @@ export default function App() {
     setEventTime(currentTime);
   };
 
-  const handleSubmit = () => {
-    Alert.alert(
-      "Evento Adicionado",
-      `Nome: ${eventName}\nData: ${eventDate.toLocaleDateString()}\nHora: ${eventTime.toLocaleTimeString()}\nDescrição: ${eventDescription}`
-    );
+  const handleSubmit = async () => {
+    try {
+      await addEvent(
+        eventName,
+        eventDate.toLocaleDateString(),
+        eventTime.toLocaleTimeString(),
+        eventDescription
+      );
+      Alert.alert(
+        "Evento Adicionado",
+        `Nome: ${eventName}\nData: ${eventDate.toLocaleDateString()}\nHora: ${eventTime.toLocaleTimeString()}\nDescrição: ${eventDescription}`
+      );
+      setEventName("");
+      setEventDate(new Date());
+      setEventTime(new Date());
+      setEventDescription("");
+    } catch (error) {
+      Alert.alert("Erro", "Ocorreu um erro ao adicionar o evento.");
+    }
   };
 
   return (
@@ -51,6 +73,7 @@ export default function App() {
             onChange={onChangeDate}
           />
         )}
+        <Text>Data Selecionada: {eventDate.toLocaleDateString()}</Text>
       </View>
       <View>
         <Button
@@ -65,6 +88,7 @@ export default function App() {
             onChange={onChangeTime}
           />
         )}
+        <Text>Hora Selecionada: {eventTime.toLocaleTimeString()}</Text>
       </View>
       <TextInput
         style={styles.input}
@@ -74,6 +98,7 @@ export default function App() {
         multiline
       />
       <Button title="Adicionar Evento" onPress={handleSubmit} />
+      <Button title="Ver Eventos" onPress={() => router.push("/details")} />
     </View>
   );
 }
